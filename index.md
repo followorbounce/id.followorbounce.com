@@ -29,7 +29,11 @@ Automatically indexed archive system for standalone HTML projects and editorial 
 
 <div class="hero-right">
 <div class="hero-monogram">
-FOB<em>.</em>
+<h1 class="hero-title">
+BOUNCE<br>
+<span class="dot">.</span>OR<span class="dot">.</span><br>
+FOLLOW
+</h1>
 </div>
 </div>
 
