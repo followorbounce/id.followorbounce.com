@@ -575,7 +575,7 @@ input, textarea, button, select {
 
 /* ── Section index content rows ─────────────────────────────────────────── */
 .content-row {
-  border-bottom: 1px solid var(--color-border, #e5e5e5);
+  border-bottom: var(--line);
   margin: 0;
 
   &__link {
@@ -585,29 +585,30 @@ input, textarea, button, select {
     align-items: center;
     padding: 1rem 0;
     text-decoration: none;
-    color: var(--color-text, #111);
-    transition: opacity 0.15s;
+    color: var(--ink);
+    transition: color 0.2s;
 
-    &:hover { opacity: 0.65; }
+    &:hover { color: var(--rust); }
   }
 
   &__year {
-    font-family: var(--font-mono, 'DM Mono', monospace);
-    font-size: 0.72rem;
-    color: var(--color-muted, #888);
-    letter-spacing: 0.04em;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--fog);
+    letter-spacing: 0.12em;
   }
 
   &__title {
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
   }
 
   &__tags {
-    font-family: var(--font-mono, 'DM Mono', monospace);
-    font-size: 0.68rem;
-    color: var(--color-muted, #888);
-    letter-spacing: 0.04em;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--fog);
+    letter-spacing: 0.08em;
     text-align: right;
   }
 }
