@@ -1,0 +1,93 @@
+title:       "Follow or Bounce"
+description: "A publication at the intersection of technology, literature, and the agreements that hold them together."
+author:      "Follow or Bounce"
+
+baseurl: ""
+url:     "https://followorbounce.com"
+
+theme: ~
+
+markdown:  kramdown
+permalink: pretty
+
+sass:
+  sass_dir: _sass
+  style:    compressed
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/
+  - arc/
+  - .vscode/
+  - .gitignore
+  - "*.swp"
+  - "*.swo"
+
+# Site-wide data used in templates
+issue_number: "01"
+established:  "2024"
+
+# Collections — output: true is REQUIRED for crawlable pages.
+# output: false means no HTML is generated; Google and LLMs cannot index them.
+collections:
+  essays:
+    output: true
+    permalink: /literature/:name/
+  reference:
+    output: true
+    permalink: /technology/:name/
+  work_projects:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  # Static standalone pages in /p/ use the standalone layout
+  - scope:
+      path: "p"
+    values:
+      layout: standalone
+  # Collection essays use the standalone layout
+  - scope:
+      path: "_essays"
+      type: essays
+    values:
+      layout: standalone
+  # Collection reference pages use the standalone layout
+  - scope:
+      path: "_reference"
+      type: reference
+    values:
+      layout: standalone
+  # Collection work projects use the standalone layout
+  - scope:
+      path: "_work_projects"
+      type: work_projects
+    values:
+      layout: standalone
+
+navigation:
+  - title: "About"
+    url:   "/about/"
+  - title: "Work"
+    url:   "/work/"
+  - title: "Technology"
+    url:   "/technology/"
+  - title: "Literature"
+    url:   "/literature/"
+  - title: "Contracts"
+    url:   "/contracts/"
+    children:
+      - title: "Digital Law"
+        url:   "/contracts/digital-law/"
+      - title: "Open Source"
+        url:   "/contracts/open-source/"
+      - title: "Platform Terms"
+        url:   "/contracts/platform-terms/"
+  - title: "Subscribe ↗"
+    url:   "/subscribe/"
+    action: true

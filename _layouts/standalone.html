@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary meta -->
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}" />
+  <link rel="canonical" href="{{ page.url | absolute_url }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="{% if page.category == 'essay' %}article{% else %}website{% endif %}" />
+  <meta property="og:site_name"   content="{{ site.title }}" />
+  <meta property="og:title"       content="{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta property="og:description" content="{{ page.description | default: site.description }}" />
+  <meta property="og:url"         content="{{ page.url | absolute_url }}" />
+  {% if page.cover %}<meta property="og:image" content="{{ page.cover | absolute_url }}" />{% endif %}
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"        content="{% if page.cover %}summary_large_image{% else %}summary{% endif %}" />
+  <meta name="twitter:title"       content="{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}" />
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}" />
+  {% if page.cover %}<meta name="twitter:image" content="{{ page.cover | absolute_url }}" />{% endif %}
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://followorbounce.com/#website",
+        "name": "Follow or Bounce",
+        "url": "https://followorbounce.com"
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://followorbounce.com/#organization",
+        "name": "Follow or Bounce",
+        "url": "https://followorbounce.com"
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "{{ page.url | absolute_url }}#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Follow or Bounce",
+            "item": "https://followorbounce.com"
+          }{% if page.section %},
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ page.section | capitalize }}",
+            "item": "https://followorbounce.com/{{ page.section }}/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ page.title | escape }}",
+            "item": "{{ page.url | absolute_url }}"
+          }{% else %},
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{{ page.title | escape }}",
+            "item": "{{ page.url | absolute_url }}"
+          }{% endif %}
+        ]
+      },
+      {
+        "@type": "{% if page.category == 'essay' %}Article{% else %}CreativeWork{% endif %}",
+        "@id": "{{ page.url | absolute_url }}#article",
+        "headline": "{{ page.title | escape }}",
+        "name": "{{ page.title | escape }}",
+        "description": "{{ page.description | escape }}",
+        "url": "{{ page.url | absolute_url }}",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ page.url | absolute_url }}"
+        },
+        "datePublished": "{{ page.year }}-01-01",
+        "dateModified": "{{ page.year }}-01-01",
+        "author": {
+          "@type": "Organization",
+          "@id": "https://followorbounce.com/#organization",
+          "name": "Follow or Bounce",
+          "url": "https://followorbounce.com"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "@id": "https://followorbounce.com/#organization",
+          "name": "Follow or Bounce",
+          "url": "https://followorbounce.com"
+        },
+        "isPartOf": {
+          "@id": "https://followorbounce.com/#website"
+        }{% if page.cover %},
+        "image": {
+          "@type": "ImageObject",
+          "url": "{{ page.cover | absolute_url }}"
+        }{% endif %}{% if page.tags %},
+        "keywords": "{{ page.tags | join: ', ' | escape }}"{% endif %}
+      }
+    ]
+  }
+  </script>
+
+  <!-- Page-level styles injected by layout (from head_css frontmatter) -->
+  {% if page.head_css %}<style>{{ page.head_css }}</style>{% endif %}
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="nav-top">
+    <a class="wordmark" href="{{ '/' | relative_url }}">Follow<span>.</span>Or<span>.</span>Bounce</a>
+    <span class="nav-meta">Est. {{ site.established }} / Issue {{ site.issue_number }}</span>
+  </div>
+
+  <nav class="menu-bar" aria-label="Main navigation">
+    {% for item in site.navigation %}
+      {% if item.children %}
+        <div class="has-submenu{% if page.section == 'contracts' %} active{% endif %}">
+          <div class="menu-bar-btn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+            <span class="dot"></span>
+            <span class="label">{{ item.title }}</span>
+            <span class="chevron" aria-hidden="true">▾</span>
+          </div>
+          <ul class="submenu" role="menu">
+            {% for child in item.children %}
+            <li role="none"><a href="{{ child.url | relative_url }}" role="menuitem"{% if page.url == child.url %} aria-current="page"{% endif %}>{{ child.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% elsif item.action %}
+        <div class="spacer" aria-hidden="true"></div>
+        <a class="menu-bar-link action" href="{{ item.url | relative_url }}">
+          <span class="label">{{ item.title }}</span>
+        </a>
+      {% else %}
+        <a class="menu-bar-link{% if page.section == item.title | downcase %} active{% endif %}"
+           href="{{ item.url | relative_url }}"
+           {% if page.section == item.title | downcase %}aria-current="page"{% endif %}>
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">{{ item.title }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+</header>
+
+<!-- ── BREADCRUMB ──────────────────────────────────────────────────────────── -->
+<nav class="standalone-breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ '/' | relative_url }}">Follow or Bounce</a>
+  {% if page.section %}
+    <span aria-hidden="true">→</span>
+    <a href="{{ '/' | append: page.section | append: '/' | relative_url }}">{{ page.section | capitalize }}</a>
+  {% endif %}
+  <span aria-hidden="true">→</span>
+  <span aria-current="page">{{ page.title }}</span>
+</nav>
+
+<!-- ── PAGE CONTENT ───────────────────────────────────────────────────────── -->
+<main>
+  {{ content }}
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer>
+  <span>© {{ 'now' | date: '%Y' }} {{ site.title }}</span>
+  <span>All rights reserved</span>
+</footer>
+
+<script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+
+<!-- ── AI CHAT WIDGET ─────────────────────────────────────────────────────── -->
+<button id="ai-btn" aria-label="Open AI chat">AI</button>
+
+<div id="ai-modal" aria-hidden="true">
+  <div id="ai-box" role="dialog" aria-modal="true" aria-label="AI Chat" aria-labelledby="ai-box-title">
+    <div id="ai-box-header">
+      <span id="ai-box-title">Ask AI</span>
+      <button id="ai-close" aria-label="Close AI chat">✕</button>
+    </div>
+    <div id="ai-messages" aria-live="polite" aria-atomic="false"></div>
+    <div id="ai-input-row">
+      <input id="ai-input" type="text" placeholder="Ask anything…" aria-label="Your message" autocomplete="off">
+      <button id="ai-send" aria-label="Send message">→</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
