@@ -6,6 +6,5 @@ category: essay
 year: "2024"
 featured: false
 cover: "/assets/images/portfolio/prophetic-os.svg"
-description: "A philosophical essay on invisible systems, sacred infrastructure, and the hidden signals embedded in everyday reality. INVISIBLE ≠ EMPTY."
-tags: ["philosophy", "symbolism", "sacred systems", "perception"]
+description: "In order to understand where we are, we must first look at the surface of the earth. INVISIBLE ≠ EMPTY."
 ---

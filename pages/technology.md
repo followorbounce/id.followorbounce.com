@@ -16,7 +16,7 @@ description: "Reference guides, deep dives, and interactive tools for radio, ele
 {% assign items = site.reference | sort: "year" | reverse %}
 {% for item in items %}
 <article class="content-row">
-  <a class="content-row__link" href="{{ item.url | relative_url }}">
+  <a class="content-row__link" href="{{ item.url }}">
     <span class="content-row__year">{{ item.year }}</span>
     <span class="content-row__title">{{ item.title }}</span>
     {% if item.tags %}<span class="content-row__tags">{{ item.tags | join: ", " }}</span>{% endif %}

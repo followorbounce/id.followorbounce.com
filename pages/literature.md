@@ -13,27 +13,26 @@ description: "Essays, manifestos, and long-form pieces on philosophy, consciousn
 
 <section class="page-content" aria-label="Essays and writing">
 
-{% assign featured_essays = site.essays | where: "featured", true | sort: "year" | reverse %}
-{% assign other_essays    = site.essays | where: "featured", false | sort: "year" | reverse %}
-
-{% for item in featured_essays %}
+{% assign items = site.essays | sort: "year" | reverse %}
+{% for item in items %}{% if item.featured != false or item.featured %}
 <article class="content-row">
-  <a class="content-row__link" href="{{ item.url | relative_url }}">
+  <a class="content-row__link" href="{{ item.url }}">
     <span class="content-row__year">{{ item.year }}</span>
     <span class="content-row__title">{{ item.title }}</span>
     {% if item.tags %}<span class="content-row__tags">{{ item.tags | join: ", " }}</span>{% endif %}
   </a>
 </article>
-{% endfor %}
+{% endif %}{% endfor %}
 
-{% for item in other_essays %}
+{% assign non_featured = site.essays | sort: "year" | reverse %}
+{% for item in non_featured %}{% unless item.featured %}
 <article class="content-row">
-  <a class="content-row__link" href="{{ item.url | relative_url }}">
+  <a class="content-row__link" href="{{ item.url }}">
     <span class="content-row__year">{{ item.year }}</span>
     <span class="content-row__title">{{ item.title }}</span>
     {% if item.tags %}<span class="content-row__tags">{{ item.tags | join: ", " }}</span>{% endif %}
   </a>
 </article>
-{% endfor %}
+{% endunless %}{% endfor %}
 
 </section>

@@ -6,6 +6,5 @@ category: essay
 year: "2026"
 featured: false
 cover: "/assets/images/portfolio/the-illuminators.svg"
-description: "A digital sermon on light, projection, spiritual deception, and the moral collapse of institutions that claim to illuminate but only cast shadow."
-tags: ["spirituality", "morality", "light", "power", "institutional failure"]
+description: "A forbidden digital sermon on light, projection, and moral collapse."
 ---

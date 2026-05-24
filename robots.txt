@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 Sitemap: https://followorbounce.com/sitemap.xml
 
-# LLM crawlers — explicitly allowed
+# LLM crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -10,13 +10,4 @@ User-agent: ClaudeBot
 Allow: /
 
 User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot
-Allow: /
-
-User-agent: Amazonbot
 Allow: /

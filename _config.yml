@@ -32,41 +32,21 @@ exclude:
 issue_number: "01"
 established:  "2024"
 
-# Collections — output: true is REQUIRED for crawlable pages.
-# output: false means no HTML is generated; Google and LLMs cannot index them.
+# Collections
 collections:
   essays:
-    output: true
+    output: false
     permalink: /literature/:name/
   reference:
-    output: true
+    output: false
     permalink: /technology/:name/
   work_projects:
-    output: true
+    output: false
     permalink: /work/:name/
 
 defaults:
-  # Static standalone pages in /p/ use the standalone layout
   - scope:
       path: "p"
-    values:
-      layout: standalone
-  # Collection essays use the standalone layout
-  - scope:
-      path: "_essays"
-      type: essays
-    values:
-      layout: standalone
-  # Collection reference pages use the standalone layout
-  - scope:
-      path: "_reference"
-      type: reference
-    values:
-      layout: standalone
-  # Collection work projects use the standalone layout
-  - scope:
-      path: "_work_projects"
-      type: work_projects
     values:
       layout: standalone
 

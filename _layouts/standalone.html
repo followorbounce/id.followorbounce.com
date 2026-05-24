@@ -35,84 +35,27 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://followorbounce.com/#website",
-        "name": "Follow or Bounce",
-        "url": "https://followorbounce.com"
-      },
-      {
-        "@type": "Organization",
-        "@id": "https://followorbounce.com/#organization",
-        "name": "Follow or Bounce",
-        "url": "https://followorbounce.com"
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "{{ page.url | absolute_url }}#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Follow or Bounce",
-            "item": "https://followorbounce.com"
-          }{% if page.section %},
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "{{ page.section | capitalize }}",
-            "item": "https://followorbounce.com/{{ page.section }}/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "{{ page.title | escape }}",
-            "item": "{{ page.url | absolute_url }}"
-          }{% else %},
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "{{ page.title | escape }}",
-            "item": "{{ page.url | absolute_url }}"
-          }{% endif %}
-        ]
-      },
-      {
-        "@type": "{% if page.category == 'essay' %}Article{% else %}CreativeWork{% endif %}",
-        "@id": "{{ page.url | absolute_url }}#article",
-        "headline": "{{ page.title | escape }}",
-        "name": "{{ page.title | escape }}",
-        "description": "{{ page.description | escape }}",
-        "url": "{{ page.url | absolute_url }}",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "{{ page.url | absolute_url }}"
-        },
-        "datePublished": "{{ page.year }}-01-01",
-        "dateModified": "{{ page.year }}-01-01",
-        "author": {
-          "@type": "Organization",
-          "@id": "https://followorbounce.com/#organization",
-          "name": "Follow or Bounce",
-          "url": "https://followorbounce.com"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "@id": "https://followorbounce.com/#organization",
-          "name": "Follow or Bounce",
-          "url": "https://followorbounce.com"
-        },
-        "isPartOf": {
-          "@id": "https://followorbounce.com/#website"
-        }{% if page.cover %},
-        "image": {
-          "@type": "ImageObject",
-          "url": "{{ page.cover | absolute_url }}"
-        }{% endif %}{% if page.tags %},
-        "keywords": "{{ page.tags | join: ', ' | escape }}"{% endif %}
-      }
-    ]
+    "@type": "{% if page.category == 'essay' %}Article{% else %}CreativeWork{% endif %}",
+    "name": "{{ page.title | escape }}",
+    "description": "{{ page.description | escape }}",
+    "url": "{{ page.url | absolute_url }}",
+    "dateCreated": "{{ page.year }}",
+    "author": {
+      "@type": "Organization",
+      "name": "Follow or Bounce",
+      "url": "https://followorbounce.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Follow or Bounce",
+      "url": "https://followorbounce.com"
+    },
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Follow or Bounce",
+      "url": "https://followorbounce.com"
+    }{% if page.cover %},
+    "image": "{{ page.cover | absolute_url }}"{% endif %}
   }
   </script>
 
@@ -131,7 +74,7 @@
   <nav class="menu-bar" aria-label="Main navigation">
     {% for item in site.navigation %}
       {% if item.children %}
-        <div class="has-submenu{% if page.section == 'contracts' %} active{% endif %}">
+        <div class="has-submenu{% if page.url contains item.url %} active{% endif %}">
           <div class="menu-bar-btn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
             <span class="dot"></span>
             <span class="label">{{ item.title }}</span>
@@ -150,8 +93,7 @@
         </a>
       {% else %}
         <a class="menu-bar-link{% if page.section == item.title | downcase %} active{% endif %}"
-           href="{{ item.url | relative_url }}"
-           {% if page.section == item.title | downcase %}aria-current="page"{% endif %}>
+           href="{{ item.url | relative_url }}">
           <span class="dot" aria-hidden="true"></span>
           <span class="label">{{ item.title }}</span>
         </a>
